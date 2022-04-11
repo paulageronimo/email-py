@@ -23,3 +23,31 @@ def generate_email(received_contents): # r_c is a library
 
     return html
 
+def search_customer_lists():
+    customer_dir = currDir+"/CSV material generator/customer_carts"
+    inventory_file = currDir+"/CSV_material_generator/inventory_items.csv"
+    low_stock = {}
+    no_stock = {}
+    inventory_file = open(inventory_file, "r")
+    inventory_reader = csv.reader(inventory_file, delimiter=',')
+    for row in inventory_reader:
+        if "Amount" in row[1]:
+            continue
+        elif int(row[1]) == 0:
+            no_stock[row[0]] = row[1]
+        elif int(row[1]) <=15:
+            low_stock[row[0]] = row[1]
+
+    filenames=os.listdir(customer_dir)
+
+    for file_name in filenames:
+        if file_name.endswith(".csv"):
+            file = open(os.path. join(customer_dir, file_name),'r')
+            reader = csv.reader(file, delimiter=',')
+            for row in reader:
+                print (row)
+                if row[0] in no_stock:
+                    send_no_stock_email("Andy", row[0], no_stock[row[0]])
+                elif row[0] in low_stock:
+                    send_low_stock_email("Andy", row[0], low_stock[row[0]])
+
