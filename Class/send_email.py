@@ -16,7 +16,7 @@ except ImportError:
 
 # sending the email with the specified items.
 # it will contain subject and body, while files remain optional :)
-def send_email(subject, body, files):
+def send_email(subject, body, files=[]):
     import smtplib #SMTP Library
     from smtplib import SMTPException
     from email.mime.base import MIMEBase
