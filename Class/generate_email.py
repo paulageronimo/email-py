@@ -47,7 +47,19 @@ def search_customer_lists():
             for row in reader:
                 print (row)
                 if row[0] in no_stock:
-                    send_no_stock_email("Andy", row[0], no_stock[row[0]])
+                    send_no_stock_email("Andy", row[0], no_stock[row[0]]) 
                 elif row[0] in low_stock:
-                    send_low_stock_email("Andy", row[0], low_stock[row[0]])
+                    send_low_stock_email("Andy", row[0], low_stock[row[0]]) # TODO: create low stock email
 
+def send_no_stock_email(cust_name, product, amount):
+    msg = "The item has been removed from your cart as it is no longer available and out of stock"
+    email_contents = {
+        "customer_name": cust_name,
+        "product": product,
+        "mssg": msg,
+        "amount": amount
+    }
+
+    body = generate_email(email_contents)
+
+    send_email(body=body, subject = "Warning! No stock left for item in your cart") # TODO: Need to create send email function
