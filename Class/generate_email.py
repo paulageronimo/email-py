@@ -24,8 +24,8 @@ def generate_email(received_contents): # r_c is a library
     return html
 
 def search_customer_lists():
-    customer_dir = currDir+"/CSV material generator/customer_carts"
-    inventory_file = currDir+"/CSV_material_generator/inventory_items.csv"
+    customer_dir = currDir+"/CSV material generator/customer_carts" # TODO: Create/import file
+    inventory_file = currDir+"/CSV_material_generator/inventory_items.csv" # TODO: Create/import file
     low_stock = {}
     no_stock = {}
     inventory_file = open(inventory_file, "r")
